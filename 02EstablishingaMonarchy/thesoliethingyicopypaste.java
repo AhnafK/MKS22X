@@ -1,10 +1,13 @@
-public boolean solveR(int row){
-    if(row >= board.length)
+public boolean solveR(int col){
+    if(col == board.length)
 	return true;
     for(int x = 0; x < board[0].length; x++){
-	if(addQueen(row, x)){
-	    if(solveR(row + 1)){
+	if(addQueen(col, x)){
+	    if(solveR(col + 1)){
 		return true;
+	    }
+	    else{
+		removeQueen(col, x);
 	    }
 	}
     }
