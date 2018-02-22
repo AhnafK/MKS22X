@@ -1,17 +1,22 @@
 public class KnightBoard{
     private int[][] board;
+    private int solutions;
     
     public KnightBoard(int rows, int cols){
 	board = new int[rows][cols];
 	if(rows <= 0 || cols <=0)
 	    throw new IllegalArgumentException();
+	resetBoard();
+    }
+
+    private void resetBoard(){
 	for(int x = 0; x < board.length; x++){
 	    for(int y = 0; y < board[0].length; y++){
 		board[x][y] = 0;
 	    }
 	}
     }
-
+    
     public String toString(){
 	String ans = "";
 	for(int y = 0; y < board[0].length; y++){
@@ -77,6 +82,8 @@ public class KnightBoard{
 	return false;
     }
 
+    //_______________________________________________________________________
+    
     private boolean solveF(int x, int y, int level, int f){
 	if(f == 0)
 	    return solveH(x+2,y+1,level+1);
@@ -96,7 +103,7 @@ public class KnightBoard{
     }
     
     public boolean solve(int startingRows,int startingCols){
-	if(startingRows <= 0 || startingCols <=0)
+	if(startingRows < 0 || startingCols <0)
 	    throw new IllegalArgumentException();
 	board[startingRows][startingCols] = 1;
 	return solveH(startingRows,startingCols,2);
@@ -120,10 +127,63 @@ public class KnightBoard{
 	}
 	return false;
     }
+
+    //_____________________________________________________________
+    
+    public int countSolutions(int startingRows,int startingCols){
+	if(startingRows < 0 || startingCols <0)
+	    throw new IllegalArgumentException();
+	solutions = 0;
+	this.resetBoard();
+	board[startingRows][startingCols] = 1;
+	solveCR(startingRows,startingCols,2);
+	return solutions;
+    }
+
+    private boolean solveCR(int row ,int col, int level){
+	System.out.println(""+this+"\n\n" + solutions + "\n---\n");
+	if(level-1 >= (board.length * board[0].length)){
+	    System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"+this);
+	    solutions+=1;
+	}
+	for(int x = 0; x < 8; x++){
+	    if(step(row,col,x,level)){
+		solveFC(row, col, level, x);
+		unStep(row, col, x);
+	    }
+	}
+	return false;
+    }
+
+
+    private boolean solveFC(int x, int y, int level, int f){
+	if(f == 0)
+	    return solveCR(x+2,y+1,level+1);
+	if(f == 1)
+	    return solveCR(x+1,y+2,level+1);
+	if(f == 2)
+	    return solveCR(x-1,y+2,level+1);
+	if(f == 3)
+	    return solveCR(x-2,y+1,level+1);
+	if(f == 4)
+	    return solveCR(x-2,y-1,level+1);
+	if(f == 5)
+	    return solveCR(x-1,y-2,level+1);
+	if(f == 6)
+	    return solveCR(x+1,y-2,level+1);
+	return solveCR(x+2,y-1,level+1);
+    }
     
     public static void main(String[]args){
 	KnightBoard f = new KnightBoard(5,5);
-	if(f.solve(0,0))
-	    System.out.println("YAY \n" + f);
+	
+	int dol = 0;
+	for(int y = 0; y < 5; y++){
+	    for(int x = 0; x < 5; x++){
+		dol += f.countSolutions(x,y);
+	    }
+	}
+	System.out.println("" + dol);
+	
     }
 }
