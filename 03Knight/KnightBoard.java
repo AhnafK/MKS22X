@@ -3,6 +3,8 @@ public class KnightBoard{
     
     public KnightBoard(int rows, int cols){
 	board = new int[rows][cols];
+	if(rows <= 0 || cols <=0)
+	    throw new IllegalArgumentException();
 	for(int x = 0; x < board.length; x++){
 	    for(int y = 0; y < board[0].length; y++){
 		board[x][y] = 0;
@@ -94,6 +96,8 @@ public class KnightBoard{
     }
     
     public boolean solve(int startingRows,int startingCols){
+	if(startingRows <= 0 || startingCols <=0)
+	    throw new IllegalArgumentException();
 	board[startingRows][startingCols] = 1;
 	return solveH(startingRows,startingCols,2);
     }
