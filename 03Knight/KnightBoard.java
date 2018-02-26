@@ -141,9 +141,9 @@ public class KnightBoard{
     }
 
     private boolean solveCR(int row ,int col, int level){
-	System.out.println(""+this+"\n\n" + solutions + "\n---\n");
+	//System.out.println(""+this+"\n\n" + solutions + "\n---\n");
 	if(level-1 >= (board.length * board[0].length)){
-	    System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"+this);
+	    //System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"+this);
 	    solutions+=1;
 	}
 	for(int x = 0; x < 8; x++){
