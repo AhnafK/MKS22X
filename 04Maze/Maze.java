@@ -42,21 +42,21 @@ public class Maze{
 	    String now = t.nextLine();
 	    for(int q = 0; q < now.length(); q++){
 		maze[q][y] = now.charAt(q);
-		if(now.charAt() == 'E'){
+		if(now.charAt(q) == 'E'){
 		    if(E)
-			throw new IllegalStateException;
+			throw new IllegalStateException();
 		    E = true;
 		}
-		if(now.charAt() == 'S'){
+		if(now.charAt(q) == 'S'){
 		    if(S)
-			throw new IllegalStateException;
+			throw new IllegalStateException();
 		    S = true;
 		}
 	    }
 	    y++;
 	}
 	if(!E||!S)
-	    throw new IllegalStateException;
+	    throw new IllegalStateException();
 	
     }
     
@@ -104,7 +104,7 @@ public class Maze{
             //and start solving at the location of the s.
 
             //return solve(???,???);
-
+	return solve(0,0,1);
     }
 
     /*
@@ -125,9 +125,9 @@ public class Maze{
             Note: This is not required based on the algorithm, it is just nice visually to see.
         All visited spots that are part of the solution are changed to '@'
     */
-    private int solve(int row, int col){ //you can add more parameters since this is private
-
-
+    private int solve(int row, int col, int count){ //you can add more parameters since this is private
+	
+	
         //automatic animation! You are welcome.
         if(animate){
 
@@ -136,16 +136,22 @@ public class Maze{
 
             wait(20);
         }
-
+	
         //COMPLETE SOLVE
-
+	if(maze[row][col]=='E')
+	    return count;
+	for(int)
         return -1; //so it compiles
     }
 
     public static void main(String[]args){
-	Maze m = new Maze();
-	
-
-
+	try{
+	    Maze m = new Maze("Data1.dat");
+	    m.setAnimate(true);
+	    m.solve(0,0,0);
+	}catch(FileNotFoundException | IllegalStateException  e){
+	    System.out.println("Error1");
+	}
     }
+    
 }
