@@ -59,8 +59,58 @@ public class Maze{
 	    throw new IllegalStateException();
 	
     }
-    
 
+    public String toString(){
+	String ans = "";
+	for(int y = 0; y < maze[0].length; y++){
+	    for(int x = 0; x < maze.length; x++){
+		ans += maze[x][y];
+	    }
+	    ans += "\n";
+	}
+	return ans;
+    }
+    
+    private boolean move(int row, int col, int way){
+	if(way == 0 && maze[row][col+1] != '#' && maze[row][col+1] != '@' && maze[row][col+1] != '.'){
+	    maze[row][col+1] = '@';
+	    return true;
+	}
+	if(way == 1 && maze[row+1][col] != '#' && maze[row+1][col] != '@' && maze[row][col+1] != '.'){
+	    maze[row+1][col] = '@';
+	    return true;
+	}
+	if(way == 2 && maze[row][col-1] != '#' && maze[row][col-1] != '@' && maze[row][col+1] != '.'){
+	    maze[row][col-1] = '@';
+	    return true;
+	}
+	if(way == 3 && maze[row-1][col] != '#' && maze[row-1][col] != '@' && maze[row][col+1] != '.'){
+	    maze[row-1][col] = '@';
+	    return true;
+	}
+	return false;
+    }
+
+    private boolean unMove(int row, int col, int way){
+	if(way == 2 && maze[row][col+1] == '@'){
+	    maze[row][col+1] = '.';
+	    return true;
+	}
+	if(way == 3 && maze[row+1][col] == '@'){
+	    maze[row+1][col] = '.';
+	    return true;
+	}
+	if(way == 0 && maze[row][col-1] == '@'){
+	    maze[row][col-1] = '.';
+	    return true;
+	}
+	if(way == 1 && maze[row-1][col] == '@'){
+	    maze[row-1][col] = '.';
+	    return true;
+	}
+	return false;
+    }
+    
     private void wait(int millis){
          try {
              Thread.sleep(millis);
@@ -95,16 +145,25 @@ public class Maze{
     */
     public int solve(){
 
-            //find the location of the S. 
-
+            //find the location of the S.
+	int r = 0;
+	int c = 0;
+	for(int y = 0; y < maze[0].length; y++){
+	    for(int x = 0; x < maze.length; x++){
+		if(maze[x][y] == 'S'){
+		    r = x;
+		    c = y;
+		}
+	    }
+	}
 
             //erase the S
-
+	maze[r][c] = '@';
 
             //and start solving at the location of the s.
-
+	
             //return solve(???,???);
-	return solve(0,0,1);
+	return solve(r,c,1);
     }
 
     /*
@@ -133,22 +192,52 @@ public class Maze{
 
             clearTerminal();
             System.out.println(this);
-
-            wait(20);
+	    System.out.println("" + row + " " + col + " ");
+            wait(100);
         }
 	
         //COMPLETE SOLVE
 	if(maze[row][col]=='E')
 	    return count;
-	for(int)
+	for(int x = 0; x < 4; x++){
+	    if(move(row,col,x)){
+		int p = solveG(row, col, x, count+1);
+		if(p != -1)
+		    return p;
+		if(unMove(row, col, x)){
+			
+		    if(animate){
+
+			clearTerminal();
+			System.out.println(this);
+			System.out.println("" + row + " " + col + " ");
+			wait(100);
+		    }
+
+		}
+	    }
+	}
         return -1; //so it compiles
     }
 
+    private int solveG(int row, int col, int way, int level){
+	if(way == 0){
+	    return solve(row,col+1, level);
+	}
+	if(way == 1){
+	   return  solve(row+1, col, level);
+	}
+	if(way == 2){
+	    return solve(row, col-1, level);
+	}
+	    return solve(row-1,col, level);
+    }
+    
     public static void main(String[]args){
 	try{
 	    Maze m = new Maze("Data1.dat");
 	    m.setAnimate(true);
-	    m.solve(0,0,0);
+	    System.out.println("" + m.solve());
 	}catch(FileNotFoundException | IllegalStateException  e){
 	    System.out.println("Error1");
 	}
