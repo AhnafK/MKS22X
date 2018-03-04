@@ -73,18 +73,26 @@ public class Maze{
     
     private boolean move(int row, int col, int way){
 	if(way == 0 && maze[row][col+1] != '#' && maze[row][col+1] != '@' && maze[row][col+1] != '.'){
+	    if(maze[row][col+1] == 'E')
+		return true;
 	    maze[row][col+1] = '@';
 	    return true;
 	}
 	if(way == 1 && maze[row+1][col] != '#' && maze[row+1][col] != '@' && maze[row][col+1] != '.'){
+	    if(maze[row+1][col] == 'E')
+		return true;
 	    maze[row+1][col] = '@';
 	    return true;
 	}
 	if(way == 2 && maze[row][col-1] != '#' && maze[row][col-1] != '@' && maze[row][col+1] != '.'){
+	    if(maze[row][col-1] == 'E')
+		return true;
 	    maze[row][col-1] = '@';
 	    return true;
 	}
 	if(way == 3 && maze[row-1][col] != '#' && maze[row-1][col] != '@' && maze[row][col+1] != '.'){
+	    if(maze[row-1][col] == 'E')
+		return true;
 	    maze[row-1][col] = '@';
 	    return true;
 	}
@@ -92,19 +100,19 @@ public class Maze{
     }
 
     private boolean unMove(int row, int col, int way){
-	if(way == 2 && maze[row][col+1] == '@'){
+	if(way == 0 && maze[row][col+1] == '@'){
 	    maze[row][col+1] = '.';
 	    return true;
 	}
-	if(way == 3 && maze[row+1][col] == '@'){
+	if(way == 1 && maze[row+1][col] == '@'){
 	    maze[row+1][col] = '.';
 	    return true;
 	}
-	if(way == 0 && maze[row][col-1] == '@'){
+	if(way == 2 && maze[row][col-1] == '@'){
 	    maze[row][col-1] = '.';
 	    return true;
 	}
-	if(way == 1 && maze[row-1][col] == '@'){
+	if(way == 3 && maze[row-1][col] == '@'){
 	    maze[row-1][col] = '.';
 	    return true;
 	}
@@ -193,7 +201,7 @@ public class Maze{
             clearTerminal();
             System.out.println(this);
 	    System.out.println("" + row + " " + col + " ");
-            wait(100);
+            wait(20);
         }
 	
         //COMPLETE SOLVE
@@ -204,17 +212,7 @@ public class Maze{
 		int p = solveG(row, col, x, count+1);
 		if(p != -1)
 		    return p;
-		if(unMove(row, col, x)){
-			
-		    if(animate){
-
-			clearTerminal();
-			System.out.println(this);
-			System.out.println("" + row + " " + col + " ");
-			wait(100);
-		    }
-
-		}
+		unMove(row, col, x);
 	    }
 	}
         return -1; //so it compiles
@@ -235,7 +233,7 @@ public class Maze{
     
     public static void main(String[]args){
 	try{
-	    Maze m = new Maze("Data1.dat");
+	    Maze m = new Maze("Data2.dat");
 	    m.setAnimate(true);
 	    System.out.println("" + m.solve());
 	}catch(FileNotFoundException | IllegalStateException  e){
