@@ -1,4 +1,5 @@
 public class Recursion{
+    boolean magic = false;
     public int fact(int n){
 	if(n < 0)
 	    throw new IllegalArgumentException();
@@ -7,6 +8,10 @@ public class Recursion{
 	return n*fact(n-1);
     }
 
+    public void mgc(){
+	magic = true;
+    }
+    
     public int fib(int d){
 	if (d < 0)
 	    throw new IllegalArgumentException();
@@ -41,11 +46,16 @@ public class Recursion{
     public double helpersqrt(double n, double guess){
 	if((guess*guess) == n || closeEnough(n,guess*guess))
 	    return guess;
-	return helpersqrt(n,( n / guess + guess) / 2);
+	if (magic)
+	    System.out.println("" + guess + "      "  + (guess*guess));
+	guess =  ( n / guess + guess) / 2;
+	return helpersqrt(n,guess);
     }
     
     public static void main(String[]args){
 	Recursion f = new Recursion();
-	System.out.println(f.sqrt(Double.parseDouble(args[0])));
+	f.mgc();
+	double g = f.sqrt(Double.parseDouble(args[0]));
+	System.out.println("" + g + "      " + g*g);
     }
 }
