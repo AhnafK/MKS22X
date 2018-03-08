@@ -31,8 +31,15 @@ public class Recursion{
 	return helpersqrt(n, 1);
     }
 
+    public static boolean closeEnough(double a, double b){
+	if(a==0.0 && b==0.0)return true;
+	if(a==0.0)return Math.abs(b) < 0.00000000001;
+	if(b==0.0)return Math.abs(a) < 0.00000000001;
+	return Math.abs(a-b)/a < 0.0001;
+    }
+    
     public double helpersqrt(double n, double guess){
-	if((guess*guess) == n)
+	if((guess*guess) == n || closeEnough(n,guess*guess))
 	    return guess;
 	return helpersqrt(n,( n / guess + guess) / 2);
     }
