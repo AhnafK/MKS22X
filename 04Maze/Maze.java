@@ -171,7 +171,7 @@ public class Maze{
             //and start solving at the location of the s.
 	
             //return solve(???,???);
-	return solve(r,c,1);
+	return solve(r,c,0);
     }
 
     /*
