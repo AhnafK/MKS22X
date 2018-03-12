@@ -47,11 +47,11 @@ public class USACO{
 	for(int y = 0; y < P[0].length; y++){
 	    for(int x = 0; x < P.length; x++){
 		int depth = P[x][y] - E;
-		if(depth >= 0)
-		    ans += 72*72*depth;
+		if(depth <= 0)
+		    ans += depth;
 	    }
 	}
-	return ans;
+	return ans * 72 * -72;
     }
 
     public static void testi(int[][] a) {
