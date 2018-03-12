@@ -24,14 +24,21 @@ public class USACO{
 
     public static int[][] step(int R, int C, int N, int[][] P, int Rm, int Cm){
 	int New = P[Cm][Rm] - N;
+	int[][] ans = P;
+	//System.out.println("New:"+New);
+
 	for(int x = C-1; x < C+2; x++){
-	    for(int y = R-1; y < R-2; y++)
-		if(P[x][y] <= New){
+	    for(int y = R-1; y < R+2; y++){
+		//System.out.println("x:"+(x+1)+"y:"+(y+1));
+		if(P[x][y] >= New){
 		    P[x][y] = New;
 		}
+	    }
 	}
-	//testi(P);
-	return P;
+
+	
+	//testi(ans);
+	return ans;
     }
     
     public static int depth(int[][] P, int E){
@@ -55,7 +62,7 @@ public class USACO{
 	    }
 	    aString += "\n";
 	}
-	//System.out.println(aString);
+	System.out.println(aString);
     }
 
     public static int Bronze(String filename) throws FileNotFoundException{
@@ -98,7 +105,7 @@ public class USACO{
 
 
 
-    //------------------------------------------------
+    /*------------------------------------------------
     
     public static void Silver(Strin filename)throws FIleNotFoundException{
 	File f = new File(filename);
@@ -123,7 +130,7 @@ public class USACO{
 
 
 
-    
+    */
     public static void main(String[]args){
 	try{
 	    System.out.println(""+Bronze("Data1.txt"));
