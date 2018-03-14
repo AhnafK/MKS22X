@@ -24,7 +24,7 @@ public class Quick{
 	}
 	data[start] = data[small-1];
 	data[small-1] = pivot;
-	System.out.println(Arrays.toString(data));
+	//System.out.println(Arrays.toString(data));
 	return small-1;
     }
     
