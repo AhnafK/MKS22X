@@ -5,7 +5,8 @@ import java.util.*;
 
 public class Quick{
     public static int partition(int [] data, int start, int end){
-	
+	if(end == start)
+	    return end;
 	Random r = new Random();
 	int pos = r.nextInt(end - start);
 	int pivot = data[start+pos];
@@ -45,8 +46,7 @@ public class Quick{
     
     public static void main(String[]args){
 	int[]ary = { 2, 10, 15, 23, 0,  5};
-	System.out.println(""+select(ary, 0));
-        
+	System.out.println(""+select(ary, 2));
     }
 
 }
