@@ -28,12 +28,25 @@ public class Quick{
 	return small-1;
     }
     
-    
+    public static int select(int[] data, int pos){
+	int x = partition(data,0,data.length-1);
+	if(pos == x)
+	    return data[pos];
+	return selectH(pos, x, data);
+    }
+
+    private static int selectH(int pos, int last, int[] data){
+	if(last > pos)
+	    return selectH(pos, partition(data, 0, last-1), data);
+	if(last < pos)
+	    return selectH(pos, partition(data, last+1, data.length-1), data);
+	return data[pos];
+    }
     
     public static void main(String[]args){
-	int[] f = { 999,999,999,4,1,0,3,2,999,999,999};
-	System.out.println(""+partition(f  , 4, 10));
-	//partition(f);
+	int[]ary = { 2, 10, 15, 23, 0,  5};
+	System.out.println(""+select(ary, 0));
+        
     }
 
 }
