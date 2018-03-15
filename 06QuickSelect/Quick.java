@@ -43,6 +43,12 @@ public class Quick{
 	    return selectH(pos, partition(data, last+1, data.length-1), data);
 	return data[pos];
     }
+
+    public static void swap(int[] data, int x, int y){
+	int pc = data[x];
+	data[x] = data[y];
+	data[y] = pc;
+    }
     
     public static void main(String[]args){
 	int[]ary = { 2, 10, 15, 23, 0,  5};
