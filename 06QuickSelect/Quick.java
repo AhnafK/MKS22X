@@ -49,7 +49,41 @@ public class Quick{
 	data[x] = data[y];
 	data[y] = pc;
     }
-    
+
+    public static int partition(int [] data, int start, int end){
+	if(end == start)
+	    return end;
+	Random r = new Random();
+	int pos = r.nextInt(end - start);
+	int pivot = data[start+pos];
+	data[pos] = data[start];
+	data[start] = pivot;
+	
+	int small = start;
+	int large = end-1;
+	int i = small+1;
+	while(i < large){
+	    if(data[i] == pivot)
+		i++;
+	    if(data[i] > pivot){
+		swap(data, i, large);
+		large--;
+	    }
+	    if(data[i] < pivot){
+		int keep = data[small];
+		data[small] = data[x];
+		data[x] = keep;
+		small++;
+		i++
+		    }
+	}
+	
+	data[start] = data[small-1];
+	data[small-1] = pivot;
+	//System.out.println(Arrays.toString(data));
+	return small-1;
+    }
+
     public static void main(String[]args){
 	int[]ary = { 2, 10, 15, 23, 0,  5};
 	System.out.println(""+select(ary, 2));
