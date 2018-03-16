@@ -55,10 +55,13 @@ public class Quick{
     }
 
     public static int[] partition(int [] data, int start, int end){
+	System.out.println("args:"+ start + " " + end);
 	Random r = new Random();
-	int pos = r.nextInt(end - start);
-	int pivot = data[start+pos];
-	data[start+pos] = data[start];
+	int pos = r.nextInt(end - start)+start;
+	System.out.println(""+pos);
+	int pivot = data[pos];
+	
+	data[pos] = data[start];
 	data[start] = pivot;
 	
 	int small = start;
@@ -67,11 +70,11 @@ public class Quick{
 	while(i <= large){
 	    if(data[i] == pivot)
 		i++;
-	    if(data[i] > pivot){
+	    else if(data[i] > pivot){
 		swap(data, i, large);
 		large--;
 	    }
-	    if(data[i] < pivot){
+	    else if(data[i] < pivot){
 		swap(data, i, small);
 		small++;
 		i++;
@@ -80,26 +83,30 @@ public class Quick{
 	}
 	
 	int[] ary = {small, i};
+	System.out.println(Arrays.toString(ary));
 	return ary;
     }
 
-    public static void sort(int[] data){
+    public static void quickSort(int[] data){
 	sortH(data, data.length-1, 0, partition(data, 0, data.length-1));
     }
 
     public static void sortH(int[]data, int hi, int lo, int[] last){
 	if(last[1] < hi)
-	    sortH(data,last[1],last[0]-1, partition(data,last[1],hi));
+	    sortH(data,last[1],last[0], partition(data,last[1],hi));
 	if(last[0] > lo)
-	    sortH(data,last[1],last[0]-1, partition(data,lo, last[0]-1));
+	    sortH(data,last[1],last[0], partition(data,lo, last[0]-1));
     }
     
     public static void main(String[]args){
 	int[]ary = { 2, 10, 15, 23, 0,  5};
-	System.out.println(""+select(ary, 4));
+	System.out.println("ans: "+select(ary, 4));
+	
+	/*
 	int[]arry = { 2, 10, 15, 23, 0,  5};
-	sort(arry);
+	quickSort(arry);
 	System.out.println(Arrays.toString(arry));
+	*/
     }
 
 }
