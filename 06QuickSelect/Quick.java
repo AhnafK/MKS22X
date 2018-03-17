@@ -32,14 +32,14 @@ public class Quick{
 
     public static int select(int[] data, int pos){
 	int[] x = partition(data,0,data.length-1);
-	if(pos == x[0] || pos == x[1])
+	if(pos == x[1])
 	    return data[pos];
 	return selectH(pos, x, data);
     }
 
     private static int selectH(int pos, int[] last, int[] data){
-	if(last[0] == pos || last[1]==pos)
-	    return data[pos];
+	if(last[1] == pos || last[0] == pos)
+	    return data[last[1]];
 	if(last[0] > pos)
 	    return selectH(pos, partition(data, 0, last[0]), data);
 	if(last[1] < pos)
@@ -82,7 +82,7 @@ public class Quick{
 	    System.out.println(Arrays.toString(data)+pivot+" "+small + " " + i + " " + large);
 	}
 	
-	int[] ary = {small, i};
+	int[] ary = {small, large};
 	System.out.println(Arrays.toString(ary));
 	return ary;
     }
@@ -92,9 +92,9 @@ public class Quick{
     }
 
     public static void sortH(int[]data, int hi, int lo, int[] last){
-	if(last[1] < hi)
+	if(last[1] < hi-1)
 	    sortH(data,last[1],last[0], partition(data,last[1],hi));
-	if(last[0] > lo)
+	if(last[0] > lo+1)
 	    sortH(data,last[1],last[0], partition(data,lo, last[0]-1));
     }
     
@@ -102,11 +102,11 @@ public class Quick{
 	int[]ary = { 2, 10, 15, 23, 0,  5};
 	System.out.println("ans: "+select(ary, 4));
 	
-	/*
+	
 	int[]arry = { 2, 10, 15, 23, 0,  5};
 	quickSort(arry);
 	System.out.println(Arrays.toString(arry));
-	*/
+	
     }
 
 }
