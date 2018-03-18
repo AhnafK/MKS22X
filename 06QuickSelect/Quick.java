@@ -93,21 +93,20 @@ public class Quick{
     }
 
     public static void sortH(int[]data, int hi, int lo, int[] last){
-	if(last[1] < hi-1)
-	    sortH(data,last[1],last[0], partition(data,last[1],hi));
-	if(last[0] > lo+1)
-	    sortH(data,last[1],last[0], partition(data,lo, last[0]-1));
+	System.out.println("last: "+Arrays.toString(last) + " hi: "+ hi + " lo: "+lo);
+	if(last[1]+1 < hi)
+	    sortH(data,hi,last[0], partition(data,last[1]+1,hi));
+	if(last[0]-1 > lo)
+	    sortH(data,last[1],lo, partition(data,lo, last[0]-1));
     }
 
     public static void main(String[]args){
-	int[]ary = { 2, 10, 15, 23, 0,  5};
-	System.out.println("ans: "+select(ary, 4));
-	
-	/*
+	//int[]ary = { 2, 10, 15, 23, 0,  5};
+	//System.out.println("ans: "+select(ary, 4));
+        
 	int[]arry = { 2, 10, 15, 23, 0,  5};
 	quickSort(arry);
 	System.out.println(Arrays.toString(arry));
-	*/
     }
     
 }
