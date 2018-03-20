@@ -27,7 +27,7 @@ public class Merge{
 	for(int x = 0; x < mid; x++){
 	    if(data[l+x] <= data[mih+x]){
 		temp[x] = data[l+x];
-		h--;
+		mih--;
 	    }
 	    if(data[l+x] >= data[mih+x]){
 		temp[x] = data[mih+x];
