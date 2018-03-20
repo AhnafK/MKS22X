@@ -25,7 +25,7 @@ public class Merge{
 	int mih = mid + 1;
 	int l = lo;
 	int h = hi;
-	for(int x = 0; x <= hi - lo; x++){
+	for(int x = 0; x < mid; x++){
 	    if(data[l+x] <= data[h+x]){
 		temp[x] = data[l+x];
 		h--;
@@ -39,7 +39,8 @@ public class Merge{
 
     public static void main(String[]args){
 	int[] data = {2,3,4,4,5,2,2,79,5};
-	mergesort(data);
+	//mergesort(data);
+	merge(data, new int[data.length],0,data.length/2,data.length);
 	System.out.println(Arrays.toString(data));
     }
 }
