@@ -24,14 +24,13 @@ public class Merge{
     public static void merge(int[]data, int[]temp, int lo, int mid, int hi){
 	int mih = mid + 1;
 	int l = lo;
-	int h = hi;
 	for(int x = 0; x < mid; x++){
-	    if(data[l+x] <= data[h+x]){
+	    if(data[l+x] <= data[mih+x]){
 		temp[x] = data[l+x];
 		h--;
 	    }
-	    if(data[l+x] >= data[h+x]){
-		temp[x] = data[h+x];
+	    if(data[l+x] >= data[mih+x]){
+		temp[x] = data[mih+x];
 		l--;
 	    }
 	}
