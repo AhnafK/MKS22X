@@ -4,18 +4,21 @@ public class Merge{
 
     public static void mergesort(int[]data){
 	int[] temp = new int[data.length];
-	msort(data, temp, 0, data.length);
+	msort(data, temp, 0, data.length-1);
     }
     
     public static void msort(int[]data, int[]temp, int lo, int hi){
+	System.out.println("___\ndata: "+Arrays.toString(data)+ " " + lo + " " + hi);
+	    System.out.println("temp: " + Arrays.toString(temp));
 	if(lo >= hi)
 	    return;
-	for(int x = lo; x < hi; x++){
+	for(int x = lo; x <= hi; x++){
 	    temp[x] = data[x];
-	    System.out.println("data: "+Arrays.toString(data));
-	    System.out.println("temp: " + Arrays.toString(temp));
+	    
 	}
 	int mp = (lo + hi)/2;
+	System.out.println("\ndata: "+Arrays.toString(data)+ " " + lo + " "+ mp + " " + hi);
+	    System.out.println("temp: " + Arrays.toString(temp));
 	msort(temp, data, lo, mp);
 	msort(temp, data, mp+1, hi);
 	merge(temp, data, lo, mp, hi); 
@@ -25,11 +28,11 @@ public class Merge{
 	int mih = mid + 1;
 	int l = lo;
 	for(int x = 0; x < mid; x++){
-	    if(data[l+x] <= data[mih+x]){
+	    if(mih >= hi || data[l+x] <= data[mih+x]){
 		temp[x] = data[l+x];
 		mih--;
 	    }
-	    if(data[l+x] >= data[mih+x]){
+	    if(l >= mid || data[l+x] >= data[mih+x]){
 		temp[x] = data[mih+x];
 		l--;
 	    }
