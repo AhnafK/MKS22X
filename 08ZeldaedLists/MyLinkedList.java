@@ -76,7 +76,7 @@ public  class MyLinkedList{
 	return ans + "]";
     }
 
-    public Integer get(int index){
+    private Node getNode(int index){
 	if(index >= size){
 	    throw new IndexOutOfBoundsException();
 	}
@@ -84,7 +84,11 @@ public  class MyLinkedList{
 	for(int x = 0; x < index; x ++){
 	    current = current.getNext();
 	}
-	return current.getValue();
+	return current;
+    }
+    
+    public Integer get(int index){
+	return getNode(index).getValue();
     }
 
     public int indexOf(Integer value){
@@ -102,7 +106,15 @@ public  class MyLinkedList{
 	start.setNext(end);
 	end.setPrev(start);
     }
-    
+
+    public Integer set(int index, Integer value){
+	Node current = getNode(index);
+	Node seet = new Node(current.getPrev(), current.getNext(), value);
+	current.getNext().setPrev(seet);
+	current.getPrev().setNext(seet);
+	return current.getValue();
+    }
+
     public static void main(String[]args){
 	MyLinkedList data = new MyLinkedList();
 	
@@ -110,6 +122,7 @@ public  class MyLinkedList{
 	data.add(5);
 	data.add(6);
 	System.out.println(data);
+	data.set(1,100);
 	System.out.println(""+data.get(1) + " " + data.indexOf(6) + " " + data.size());
 	data.clear();
 	System.out.println(data);
