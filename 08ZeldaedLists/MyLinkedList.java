@@ -34,6 +34,12 @@ public  class MyLinkedList{
 	    return data;
 	}
 
+	private Integer setValue(Integer i){
+	    Integer ans = data;
+	    data = i;
+	    return ans;
+	}
+	
 	private boolean setPrev(Node n){
 	    prev = n;
 	    return true;
@@ -109,12 +115,22 @@ public  class MyLinkedList{
 
     public Integer set(int index, Integer value){
 	Node current = getNode(index);
-	Node seet = new Node(current.getPrev(), current.getNext(), value);
-	current.getNext().setPrev(seet);
-	current.getPrev().setNext(seet);
-	return current.getValue();
+	return current.setValue(value);
     }
 
+    public boolean remove(Integer value){
+	Node current = getNode(indexOf(value));
+	return current.getPrev().setNext(current.getNext()) &&
+	    current.getNext().setPrev(current.getPrev());
+    }
+
+    public Integer remove(int index){
+	Node current = getNode(index);
+	current.getPrev().setNext(current.getNext());
+	current.getNext().setPrev(current.getPrev());
+	return current.getValue();
+    }
+    
     public static void main(String[]args){
 	MyLinkedList data = new MyLinkedList();
 	
