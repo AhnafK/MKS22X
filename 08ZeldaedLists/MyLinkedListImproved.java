@@ -68,6 +68,15 @@ public class MyLinkedListImproved<L>{
 	return true;
     }
 
+    public boolean add(int index, Integer value){
+	Node neW = new Node(end, value);
+	Node wow = getNode(index-1) ;
+	wow.next.setPrev(neW);
+	wow.setNext(neW);
+	size += 1;
+	return true;
+    }
+    
     public int size(){
 	return size;
     }
@@ -83,7 +92,7 @@ public class MyLinkedListImproved<L>{
     }
 
     private Node getNode(int index){
-	if(index >= size){
+	if(index >= size || index < 0){
 	    throw new IndexOutOfBoundsException();
 	}
 	Node current = start.next;

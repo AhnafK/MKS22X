@@ -68,6 +68,21 @@ public  class MyLinkedList{
 	return true;
     }
 
+    public boolean add(int index, Integer value){
+	Node neW = new Node(end, value);
+	if(index == 0){
+	    start.getNext().setPrev(neW);
+	    start.setNext(neW);
+	}
+	else{
+	    Node wow = getNode(index-1) ;
+	    wow.getNext().setPrev(neW);
+	    wow.setNext(neW);
+	    size += 1;
+	}
+	return true;
+    }
+    
     public int size(){
 	return size;
     }
@@ -83,7 +98,8 @@ public  class MyLinkedList{
     }
 
     private Node getNode(int index){
-	if(index >= size){
+	System.out.println(""+ size + " " + index);
+	if(index > size || index < -1){
 	    throw new IndexOutOfBoundsException();
 	}
 	Node current = start.next;
