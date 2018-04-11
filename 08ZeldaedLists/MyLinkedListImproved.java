@@ -1,4 +1,10 @@
-public class MyLinkedListImproved<L>{
+import java.util.*;
+public class MyLinkedListImproved<L> implements Iterable<L>{
+
+    public Literator iterator(){
+	return new Literator(this);
+    }
+    
     private class Node{
 	private Node prev;
 	private Node next;
@@ -50,29 +56,55 @@ public class MyLinkedListImproved<L>{
 	    return true;
 	}
     }
+
+    public class Literator implements Iterator<L>{
+	Node current;
+	MyLinkedListImproved<L> a;
+
+	private Literator(MyLinkedListImproved<L> b){
+	    a = b;
+	    current = a.start;
+	}
+	
+	public boolean hasNext(){
+	    return  current.next != a.end;
+	}
+
+	public L next(){
+	    current = current.next;
+	    return current.getValue();
+	}
+    }
     private Node start;
     private Node end;
     private int size;
 
     public MyLinkedListImproved(){
 	size = 0;
-	start = new Node(end, null);
-	end = new Node(null, start);
+	start = new Node(null, end, null);
+	end = new Node(start, null, null);
     }
 
     public boolean add(L value){
-	Node neW = new Node(end, value);
+	Node neW = new Node(null, end, value);
 	end.getPrev().setNext(neW);
 	end.setPrev(neW);
 	size += 1;
 	return true;
     }
 
-    public boolean add(int index, Integer value){
-	Node neW = new Node(end, value);
-	Node wow = getNode(index-1) ;
-	wow.next.setPrev(neW);
-	wow.setNext(neW);
+        public boolean add(int index, L value){
+	if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException();
+        }
+	if(index == size)
+	    add(value);
+	
+	Node nextt = getNode(index);
+	Node current = new Node (nextt.prev, nextt, value);
+	//nextt.prev.next = current;
+	getNode(index-1).setNext(current);
+	nextt.prev = current;
 	size += 1;
 	return true;
     }
