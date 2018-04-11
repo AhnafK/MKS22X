@@ -5,6 +5,10 @@ public  class MyLinkedList{
 	private Integer data;
 
 	private Node(){}
+
+	private Node(Integer value){
+	    data = value;
+	}
 	
 	private Node(Node l, Node n, Integer i){
 	    prev = l;
@@ -56,8 +60,11 @@ public  class MyLinkedList{
 
     public MyLinkedList(){
 	size = 0;
-	start = new Node(end, null);
-	end = new Node(null, start);
+	start = new Node();
+	start.setNext(end);
+	end = new Node();
+	end.setPrev(start);
+	
     }
 
     public boolean add(Integer value){
@@ -68,23 +75,28 @@ public  class MyLinkedList{
 	return true;
     }
 
+
+    
     public boolean add(int index, Integer value){
-	Node neW = new Node(end, value);
-	if(index == 0){
-	    start.getNext().setPrev(neW);
-	    start.setNext(neW);
-	}
-	else{
-	    Node wow = getNode(index-1) ;
-	    wow.getNext().setPrev(neW);
-	    wow.setNext(neW);
-	    size += 1;
-	}
+	if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException();
+        }
+	if(index == size)
+	    add(value);
+	
+	Node nextt = getNode(index);
+	Node current = new Node (nextt.prev, nextt, value);
+	//nextt.prev.next = current;
+	getNode(index-1).setNext(current);
+	nextt.prev = current;
+	size += 1;
 	return true;
     }
     
+    
     public int size(){
 	return size;
+	
     }
     
     public String toString(){
@@ -94,12 +106,17 @@ public  class MyLinkedList{
 	    ans += " " + current.getValue() + ",";
 	    current = current.getNext();
 	}
+	
 	return ans + "]";
     }
 
     private Node getNode(int index){
-	System.out.println(""+ size + " " + index);
-	if(index > size || index < -1){
+	//System.out.println(""+ size + " " + index);
+	if(index == -1)
+	    return start;
+	if(index == size)
+	    return end;
+	if(index > size){
 	    throw new IndexOutOfBoundsException();
 	}
 	Node current = start.next;
@@ -153,6 +170,7 @@ public  class MyLinkedList{
 	data.add(4);
 	data.add(5);
 	data.add(6);
+	data.add(3,10);
 	System.out.println(data);
 	data.set(1,100);
 	System.out.println(""+data.get(1) + " " + data.indexOf(6) + " " + data.size());
