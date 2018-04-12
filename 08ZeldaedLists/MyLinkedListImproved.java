@@ -186,19 +186,38 @@ public class MyLinkedListImproved<L extends Comparable<L>> implements Iterable<L
 	    return -1;
 	int index = 0;
 	int current = 1;
-	Iterator l = new iterator();
-	int max = l.next();
+	Literator l = iterator();
+	L max = l.next();
 	while(l.hasNext()){
-	    int now = l.next();
-	    if(now > max){
+	    L now = l.next();
+	    if(now.compareTo(max) > 0){
 		index = current;
 		max = now;
 	    }
-	    index ++;
+	    current ++;
+	}
+	return index;
+    }
+
+    public int min(){
+	if(size < 1)
+	    return -1;
+	int index = 0;
+	int current = 1;
+	Literator l = iterator();
+	L min = l.next();
+	while(l.hasNext()){
+	    L now = l.next();
+	    if(now.compareTo(min) < 0){
+		index = current;
+		min = now;
+	    }
+	    current ++;
 	}
 	return index;
     }
     
+
     public static void main(String[]args){
 	MyLinkedListImproved<Integer> data = new MyLinkedListImproved<>();
 	
@@ -207,7 +226,7 @@ public class MyLinkedListImproved<L extends Comparable<L>> implements Iterable<L
 	data.add(6);
 	System.out.println(data);
 	data.set(1,100);
-	System.out.println(""+data.get(1) + " " + data.indexOf(6) + " " + data.size());
+	System.out.println(""+data.get(1) + " " + data.indexOf(6) + " " + data.size() + " " + data.max());
 	data.clear();
 	System.out.println(data);
 
