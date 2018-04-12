@@ -1,5 +1,5 @@
 import java.util.*;
-public class MyLinkedListImproved<L> implements Iterable<L>{
+public class MyLinkedListImproved<L extends Comparable<L>> implements Iterable<L>{
 
     public Literator iterator(){
 	return new Literator(this);
@@ -114,11 +114,20 @@ public class MyLinkedListImproved<L> implements Iterable<L>{
     }
     
     public String toString(){
+	/*
 	Node current = start.next;
 	String ans = "[";
 	while(current != end){
 	    ans += " " + current.getValue() + ",";
 	    current = current.getNext();
+	}
+	return ans + "]";
+	*/
+
+	String ans = "[";
+	Iterator j = iterator();
+	while(j.hasNext()){
+	    ans += "" + j.next() + ", ";
 	}
 	return ans + "]";
     }
@@ -170,6 +179,24 @@ public class MyLinkedListImproved<L> implements Iterable<L>{
 	current.getPrev().setNext(current.getNext());
 	current.getNext().setPrev(current.getPrev());
 	return current.getValue();
+    }
+
+    public int max(){
+	if(size < 1)
+	    return -1;
+	int index = 0;
+	int current = 1;
+	Iterator l = new iterator();
+	int max = l.next();
+	while(l.hasNext()){
+	    int now = l.next();
+	    if(now > max){
+		index = current;
+		max = now;
+	    }
+	    index ++;
+	}
+	return index;
     }
     
     public static void main(String[]args){
