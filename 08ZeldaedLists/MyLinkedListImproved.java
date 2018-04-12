@@ -217,7 +217,15 @@ public class MyLinkedListImproved<L extends Comparable<L>> implements Iterable<L
 	return index;
     }
     
+    public void extend(MyLinkedListImproved<L> ot){
+	Node wow = ot.getNode(0);
+	Node last = end.getPrev();
+	ot.end.getPrev().setNext(this.end);
+	wow.setPrev(last);
+	last.setNext(wow);
+    }
 
+    
     public static void main(String[]args){
 	MyLinkedListImproved<Integer> data = new MyLinkedListImproved<>();
 	
@@ -227,18 +235,19 @@ public class MyLinkedListImproved<L extends Comparable<L>> implements Iterable<L
 	System.out.println(data);
 	data.set(1,100);
 	System.out.println(""+data.get(1) + " " + data.indexOf(6) + " " + data.size() + " " + data.max());
-	data.clear();
+	//data.clear();
 	System.out.println(data);
 
-	MyLinkedListImproved<String> datb = new MyLinkedListImproved<>();
+	MyLinkedListImproved<Integer> datb = new MyLinkedListImproved<>();
 	
-	datb.add("four");
-	datb.add("five");
-	datb.add("six");
+	datb.add(5678);
+	datb.add(34);
+	datb.add(67);
 	System.out.println(datb);
-	datb.set(1,"hund");
-	System.out.println(datb.get(1) + " " + datb.indexOf("six") + " " + datb.size());
-	datb.clear();
-	System.out.println(datb);
+	datb.set(1,2625);
+	data.extend(datb);
+	//System.out.println("" + datb.get(1) + " " + datb.indexOf("six") + " " + datb.size());
+	//datb.clear();
+	System.out.println(data);
     }
 }
