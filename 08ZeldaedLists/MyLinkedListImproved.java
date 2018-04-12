@@ -93,7 +93,7 @@ public class MyLinkedListImproved<L extends Comparable<L>> implements Iterable<L
 	return true;
     }
 
-        public boolean add(int index, L value){
+    public boolean add(int index, L value){
 	if (index < 0 || index > size) {
             throw new IndexOutOfBoundsException();
         }
@@ -249,5 +249,6 @@ public class MyLinkedListImproved<L extends Comparable<L>> implements Iterable<L
 	//System.out.println("" + datb.get(1) + " " + datb.indexOf("six") + " " + datb.size());
 	//datb.clear();
 	System.out.println(data);
+	radixsort(data);
     }
 }
