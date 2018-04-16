@@ -67,6 +67,8 @@ public class MyLinkedListImproved<L extends Comparable<L>> implements Iterable<L
 	}
 	
 	public boolean hasNext(){
+	    if(size() == 0)
+		return false;
 	    return  current.next != a.end;
 	}
 
@@ -134,6 +136,7 @@ public class MyLinkedListImproved<L extends Comparable<L>> implements Iterable<L
 
     private Node getNode(int index){
 	if(index >= size || index < 0){
+	    System.out.print("index: "+index + "size: " + size);
 	    throw new IndexOutOfBoundsException();
 	}
 	Node current = start.next;
@@ -144,7 +147,12 @@ public class MyLinkedListImproved<L extends Comparable<L>> implements Iterable<L
     }
     
     public L get(int index){
-	return getNode(index).getValue();
+	//return getNode(index).getValue();
+	if(index >= size || index < 0){
+	    //System.out.print("index: "+index + "size: " + size);
+	    throw new IndexOutOfBoundsException();
+	}
+	return getNode(index).data;
     }
 
     public int indexOf(L value){
@@ -196,6 +204,7 @@ public class MyLinkedListImproved<L extends Comparable<L>> implements Iterable<L
 	    }
 	    current ++;
 	}
+	System.out.println(max);
 	return index;
     }
 
@@ -218,11 +227,24 @@ public class MyLinkedListImproved<L extends Comparable<L>> implements Iterable<L
     }
     
     public void extend(MyLinkedListImproved<L> ot){
+	//System.out.println(this+"    " + ot);
+	if(ot.size() == 0)
+	    return;
+	if(this.size == 0){
+	    this.start = ot.start;
+	    this.end = ot.end;
+	    this.size = ot.size();
+	    return;
+	}
 	Node wow = ot.getNode(0);
 	Node last = end.getPrev();
+	//System.out.println("Last: "+last.getValue());
+	size += ot.size();
 	ot.end.getPrev().setNext(this.end);
 	wow.setPrev(last);
 	last.setNext(wow);
+	end.setPrev(ot.end.getPrev());
+	ot.clear();
     }
 
     
@@ -232,23 +254,24 @@ public class MyLinkedListImproved<L extends Comparable<L>> implements Iterable<L
 	data.add(4);
 	data.add(5);
 	data.add(6);
-	System.out.println(data);
+	//System.out.println(data);
 	data.set(1,100);
-	System.out.println(""+data.get(1) + " " + data.indexOf(6) + " " + data.size() + " " + data.max());
+	//System.out.println(""+data.get(1) + " " + data.indexOf(6) + " " + data.size() + " " + data.max());
 	//data.clear();
-	System.out.println(data);
+	//System.out.println(data);
 
 	MyLinkedListImproved<Integer> datb = new MyLinkedListImproved<>();
 	
-	datb.add(5678);
+	datb.add(5677);
 	datb.add(34);
 	datb.add(67);
-	System.out.println(datb);
+	//System.out.println(datb);
 	datb.set(1,2625);
 	data.extend(datb);
 	//System.out.println("" + datb.get(1) + " " + datb.indexOf("six") + " " + datb.size());
 	//datb.clear();
 	System.out.println(data);
-	radixsort(data);
+	Sorts.radixsort(data);
+	System.out.println(data);
     }
 }
