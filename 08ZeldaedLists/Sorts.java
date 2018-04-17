@@ -27,6 +27,12 @@ public class Sorts{
 	    }
 	    //System.out.println("Loop: "+poopy+ "  " +data);
 	}
+
+	public static void radixsortIncludingNegatives(MyLinkedListImproved<Integer> data){ 
+	    //either blank method
+	    //OR
+	    //radixsort(data)
+	}
     }
     
     
