@@ -264,7 +264,7 @@ public class MyLinkedListImproved<L extends Comparable<L>> implements Iterable<L
 	
 	datb.add(5677);
 	datb.add(34);
-	datb.add(67);
+	datb.add(-67);
 	//System.out.println(datb);
 	datb.set(1,2625);
 	data.extend(datb);
