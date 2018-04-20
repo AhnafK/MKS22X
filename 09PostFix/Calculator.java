@@ -30,7 +30,7 @@ public class Calculator{
 	    if(enter.charAt(x) == ' '){
 		
 		stak.add(now);
-		//System.out.println(now);
+		////System.out.println(now);
 		now = "";
 	    }
 	    else{
@@ -44,37 +44,67 @@ public class Calculator{
 
     public static double eval(String s){
 	LinkedList<String> gravy = stack(s);
-	System.out.println("first: "+gravy);
+	//System.out.println("first: "+gravy);
+	boolean cee = false;
 	while(gravy.size() > 1){
+	    double d = 0.0;
 	    double a = Double.parseDouble(gravy.pop());
-	    System.out.println("a "+a+" "+gravy);
+	    //System.out.println("a "+a+" "+gravy);
 	    double b = Double.parseDouble(gravy.pop());
-	    System.out.println("b "+b+" "+gravy);
+	    //System.out.println("b "+b+" "+gravy);
+	    if(!(gravy.peek().equals("+") ||gravy.peek().equals("-") ||gravy.peek().equals("*") ||gravy.peek().equals("/") ||gravy.peek().equals("%"))){
+		cee = true;
+		d = a;
+		a = b;
+		b = Double.parseDouble(gravy.pop());
+	    }
 	    //while(gravy.size() > 0){
 	    String c = gravy.pop();
-	    System.out.println("|"+c+"|");
-	    if(c.equals("+"))
+	    //System.out.println("|"+c+"|");
+	    if(c.equals("+")){
+		if(cee){
+		    cee = false;
+		    gravy.push(d+"");
+		}
 		gravy.push(a+b+"");
-	    else if(c.equals("-"))
+	    }
+	    else if(c.equals("-")){
+		if(cee){
+		    cee = false;
+		    gravy.push(d+"");
+		}
 		gravy.push(a-b+"");
-	    else if(c.equals("/"))
+	    }
+	    else if(c.equals("/")){
+		if(cee){
+		    cee = false;
+		    gravy.push(d+"");
+		}
 		gravy.push(a/b+"");
-	    else if(c.equals("*"))
+	    }
+	    else if(c.equals("*")){
+		if(cee){
+		    cee = false;
+		    gravy.push(d+"");
+		}
 		gravy.push(a*b+"");
-	    else if(c.equals("%"))
+	    }
+	    else if(c.equals("%")){
+		if(cee){
+		    cee = false;
+		    gravy.push(d+"");
+		}
 		gravy.push(a%b+"");
+	    }
 	    else{
 		gravy.push(b+"");
-		//double f = a;
-		//a = Double.parseDouble(gravy.pop());
-		//b = Double.parseDouble(gravy.pop());
 		gravy.push(a+"");
 	    }
-	    System.out.println(gravy);
+	    //System.out.println(gravy);
 	}
 	return Double.parseDouble(gravy.pop());
     }
     public static void main(String[]args){
-	System.out.println(""+eval("11 3 - 4 + 2.5 *"));
+	System.out.println(""+eval("8 2 + 99 9 - * 2 + 9 -"));
     }
 }
