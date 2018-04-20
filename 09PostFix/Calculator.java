@@ -58,9 +58,16 @@ public class Calculator{
 	    else if(c.equals("-"))
 		gravy.push(a-b+"");
 	    else if(c.equals("/"))
-		gravy.push(a-b+"");
+		gravy.push(a/b+"");
+	    else if(c.equals("*"))
+		gravy.push(a*b+"");
+	    else if(c.equals("%"))
+		gravy.push(a%b+"");
 	    else{
 		gravy.push(b+"");
+		//double f = a;
+		//a = Double.parseDouble(gravy.pop());
+		//b = Double.parseDouble(gravy.pop());
 		gravy.push(a+"");
 	    }
 	    System.out.println(gravy);
@@ -68,6 +75,6 @@ public class Calculator{
 	return Double.parseDouble(gravy.pop());
     }
     public static void main(String[]args){
-	System.out.println(""+eval("3 34 +"));
+	System.out.println(""+eval("11 3 - 4 + 2.5 *"));
     }
 }
