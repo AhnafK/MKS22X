@@ -105,11 +105,15 @@ public class MyDeque<E>{
 	return ans + "]";
     }
 
-    public E getFirst(){
+    public E getFirst(){if(size == 0){
+	    throw new NoSuchElementException();
+	}
 	return deq[start];
     }
     
-    public E getLast(){
+    public E getLast(){if(size == 0){
+	    throw new NoSuchElementException();
+	}
 	return deq[(start+size-1)%deq.length];
     }
     
