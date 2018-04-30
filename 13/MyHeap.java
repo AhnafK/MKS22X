@@ -20,14 +20,14 @@ public class MyHeap{
 	for(int x = 0; x < size; x++){
 	    temp[x] = hep[x];
 	}
-	hep = tep;
+	hep = temp;
     }
 
     public void add(String s){
 	if(max)
 	    maxAdd(s);
 	else{
-	    manAdd(s)
+	    minAdd(s);
 	}
     }
 
@@ -37,32 +37,32 @@ public class MyHeap{
 	hep[b] = a;
     }
     
-    private void minAdd(s){
-	if(size = hep.length){
+    private void minAdd(String s){
+	if(size == hep.length){
 	    resize();
 	}
 	hep[size] = s;
 	int pos = size;
-	while(hep[pos] < hep[(pos-1)/2]){
+	while(small(hep[pos],hep[(pos-1)/2])){
 	    swap(pos,(pos-1)/2);
 	    pos = (pos-1)/2;
 	}
 	size += 1;
     }
 
-    public void size(){
+    public int size(){
 	return size;
     }
     
-    private void maxAdd(s){
-	if(size = hep.length){
+    private void maxAdd(String s){
+	if(size == hep.length){
 	    resize();
 	}
 	hep[size] = s;
 	if(size() == 0)
 	    return;
 	int pos = size;
-	while(hep[pos] > hep[(pos-1)/2]){
+	while(big(hep[pos],hep[(pos-1)/2])){
 	    swap(pos,(pos-1)/2);
 	    pos = (pos-1)/2;
 	}
@@ -73,7 +73,30 @@ public class MyHeap{
 	return hep[0];
     }
 
+    private boolean big(String a,String b){
+	if(a.compareTo(b)>0)
+	    return true;
+	return false;
+    }
+
+    private boolean small(String a,String b){
+	if(a.compareTo(b)<0)
+	    return true;
+	return false;
+    }
+
+/*
+    private void heapify(){
+	for(int x = size-1; x > 0; x--){
+	    int posa = x;
+	    int posb
+	}
+    }
+*/
     public String remove(){
-	
+	if(size <= hep.length-1)
+	    resize();
+	hep[hep.length-1]=hep[0];
+	return hep[hep.length-1];
     }
 }
