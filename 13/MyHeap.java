@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class MyHeap{
     private String[] hep;
     private boolean max;
@@ -60,6 +62,8 @@ public class MyHeap{
 	}
 	hep[size] = s;
 	if(size() == 0)
+	    
+	size += 1;
 	    return;
 	int pos = size;
 	while(big(hep[pos],hep[(pos-1)/2])){
@@ -85,18 +89,48 @@ public class MyHeap{
 	return false;
     }
 
-/*
+
     private void heapify(){
 	for(int x = size-1; x > 0; x--){
-	    int posa = x;
-	    int posb
+	    int posa = (x-1)/2*2+1;
+	    int posb = (x-1)/2*2+2;
+	    int posp = (x-1)/2;
+	    /*
+	    if(big(hep[posa],hep[posb])){
+		if(big(hep[posa],hep[posp])){
+		    swap(posa,posp);
+		}
+	    }else if(big(hep[posb],hep[posp])){
+		swap(posb,posp);
+	    }
+	    */
+	    push(posa,posb,posp);
 	}
     }
-*/
+
+    private void push(int posa,int posb,int posp){
+	if(big(hep[posa],hep[posb])){
+		if(big(hep[posa],hep[posp])){
+		    swap(posa,posp);
+		}
+	    }else if(big(hep[posb],hep[posp])){
+		swap(posb,posp);
+	    }
+    }
+
     public String remove(){
 	if(size <= hep.length-1)
 	    resize();
 	hep[hep.length-1]=hep[0];
+	heapify();
 	return hep[hep.length-1];
+    }
+
+    public static void main(String[]args){
+	MyHeap f = new MyHeap();
+	f.add("J");
+	f.add("K");
+	f.add("j");
+	System.out.println(Arrays.toString(f.hep));
     }
 }
