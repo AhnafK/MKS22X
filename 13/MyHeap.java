@@ -61,10 +61,10 @@ public class MyHeap{
 	    resize();
 	}
 	hep[size] = s;
-	if(size() == 0)
-	    
-	size += 1;
+	if(size() == 0){ 
+	    size += 1;
 	    return;
+	}
 	int pos = size;
 	while(big(hep[pos],hep[(pos-1)/2])){
 	    swap(pos,(pos-1)/2);
@@ -78,12 +78,16 @@ public class MyHeap{
     }
 
     private boolean big(String a,String b){
+	if(b == null)
+	    return true;
 	if(a.compareTo(b)>0)
 	    return true;
 	return false;
     }
 
     private boolean small(String a,String b){
+	if(b==null)
+	    return true;
 	if(a.compareTo(b)<0)
 	    return true;
 	return false;
@@ -109,28 +113,46 @@ public class MyHeap{
     }
 
     private void push(int posa,int posb,int posp){
-	if(big(hep[posa],hep[posb])){
+	if(max){
+	    if(big(hep[posa],hep[posb])){
 		if(big(hep[posa],hep[posp])){
 		    swap(posa,posp);
 		}
 	    }else if(big(hep[posb],hep[posp])){
 		swap(posb,posp);
 	    }
+	}
+	else{
+	    if(small(hep[posa],hep[posb])){
+		if(small(hep[posa],hep[posp])){
+		    swap(posa,posp);
+		}
+	    }else if(small(hep[posb],hep[posp])){
+		swap(posb,posp);
+	    }
+	}
     }
 
     public String remove(){
-	if(size <= hep.length-1)
-	    resize();
-	hep[hep.length-1]=hep[0];
+	String ans = peek();
+	hep[0] = hep[size-1];
+	size--;
+	hep[size] = null;
 	heapify();
-	return hep[hep.length-1];
+	
+	return ans;
     }
 
     public static void main(String[]args){
 	MyHeap f = new MyHeap();
 	f.add("J");
+	System.out.println(""+f.size);
 	f.add("K");
+	System.out.println(""+f.size);
 	f.add("j");
+	System.out.println(""+f.size);
+	System.out.println(f.remove());
+	System.out.println(""+f.size);
 	System.out.println(Arrays.toString(f.hep));
     }
 }
