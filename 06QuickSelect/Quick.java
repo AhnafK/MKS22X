@@ -30,7 +30,7 @@ public class Quick{
     }
     */
 
-    public static int select(int[] data, int pos){
+    public static int quickselect(int[] data, int pos){
 	int[] x = partition(data,0,data.length-1);
 	if(pos <= x[1] && pos >= x[0])
 	    return data[pos];
@@ -88,7 +88,7 @@ public class Quick{
 	return ary;
     }
 
-    public static void quickSort(int[] data){
+    public static void quicksort(int[] data){
 	sortH(data, data.length-1, 0, partition(data, 0, data.length-1));
     }
 
@@ -100,6 +100,7 @@ public class Quick{
 	    sortH(data,last[0],lo, partition(data,lo, last[0]-1));
     }
 
+    /*
     public static void main(String[]args){
 	//int[]ary = { 2, 10, 15, 23, 0,  5};
 	//System.out.println("ans: "+select(ary, 4));
@@ -108,5 +109,5 @@ public class Quick{
 	quickSort(arry);
 	System.out.println(Arrays.toString(arry));
     }
-    
+   */
 }
