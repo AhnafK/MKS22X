@@ -19,4 +19,8 @@ public class Location{
     public int getY(){
 	return y;
     }
+
+    public char getPart(Maze m){
+	return m.getPos(x,y);
+    }
 }
