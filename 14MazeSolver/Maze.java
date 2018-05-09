@@ -1,18 +1,28 @@
+import java.util.*;
 public class Maze{
     private Location start,end;
     private char[][] board;
 
     public Maze(String mazeText){
-	/*
+	
 	Scanner s = new Scanner(mazeText);
-	int x = s.next().length();
+	int x = s.nextLine().length();
 	int y = 1;
-	while(s.hasNext()){
+	while(s.hasNextLine()){
 	    y+=1;
+	    s.nextLine();
 	}
 	board = new char[x][y];
-	*/
+	//System.out.println(mazeText);
+	s = new Scanner(mazeText);
+	for(int c = 0; c < board[0].length; c++){
+	    String nextlin = s.nextLine();
+	    for(int r = 0; r < board.length; r++){
+		board[r][c] = nextlin.charAt(r);
+	    }
+	}
     }
+
 
     // '#' - wall 
     // ' ' - open space
@@ -24,8 +34,8 @@ public class Maze{
     public String toString(){
 	String ans = "";
 	for(int y = 0; y < board[0].length; y++){
-	    for(int x = 0; x > board.length; x++){
-		ans+=board[x][y]+ " ";
+	    for(int x = 0; x < board.length; x++){
+		ans+=board[x][y];
 	    }
 	    ans+="\n";
 	}
@@ -93,7 +103,10 @@ public class Maze{
 	return null;
     }
 
-
+    public static void main(String[]d){
+	Maze g = new Maze("##########\n#        #\n##########");
+	System.out.println(""+g);
+    }
 
 }
 
