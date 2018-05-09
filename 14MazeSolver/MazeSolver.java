@@ -22,13 +22,13 @@ public class MazeSolver{
 	//when there are no more values in the frontier return false
 	Frontier Q = new FrontierQueue();
 	while(Q.hasNext()){
-	    Location[] g = maze.getNeighbors(Q.pop());
+	    Location Ree = Q.next();
+	    if(Ree.getX() == maze.getEnd().getX() && Ree.getY() == maze.getEnd().getY()){
+		return true;
+	    }
+	    Location[] g = maze.getNeighbors(Ree);
 	    for(int l = 0; l < g.length; l++){
 		Q.add(g[l]);
-		mazeg[l];
-		if(g[l].getX() == maze.getEnd().getX() && g[l].getY() == maze.getEnd().getY()){
-		    return true;
-		}
 	    }
 	}
 	return false;

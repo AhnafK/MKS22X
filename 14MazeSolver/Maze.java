@@ -45,6 +45,10 @@ public class Maze{
     public char getPos(int x, int y){
 	return board[x][y];
     }
+
+    public char getPlace(Location l){
+	return l.getPart(this);
+    }
     
     // Work on this method as a group! 
     public String toStringColor(){
