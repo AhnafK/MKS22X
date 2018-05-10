@@ -42,6 +42,14 @@ public class Maze{
 	return ans;
     }
 
+    public boolean walk(Location n){
+	if(board[n.getX()][n.getY()] == ' ' || board[n.getX()][n.getY()] == 'S' ){
+	    board[n.getX()][n.getY()] = '.';
+	    return true;
+	}
+	return false;
+    }
+    
     public char getPos(int x, int y){
 	return board[x][y];
     }
@@ -58,17 +66,18 @@ public class Maze{
     //return a list of Locations that are:
     // adjacent to n and  not visited
     // all the Locations in this list should have their previous set to n.
+    @SuppressWarnings("unchecked")
     public Location[] getNeighbors(Location n){
 	int num = 0;
 	for(int x = 0; x < 4; x++){
 	    if(NLH(n,x).getPart(this) == ' ')
 		num+=1;
 	}
-	Location[] f = (Location[])new Object[num];
+	Location[] f = new Location[num];
 	int y = 0;
 	for(int x = 0; x < 4; x++){
 	    Location Jeff = NLH(n,x);
-	    if(Jeff.getPart(this) == ' '){
+	    if(getPlace(Jeff) == ' ' && Jeff != n){
 		f[y] = Jeff;
 		y++;
 	    }
@@ -93,23 +102,33 @@ public class Maze{
     
     public Location getStart(){
 	for(int y = 0; y < board[0].length; y++){
-	    for(int x = 0; x > board.length; x++){
+	    for(int x = 0; x < board.length; x++){
 		if(board[x][y] == 'S'){
 		    Location f = new Location(x,y,null);
 		    return f;
 		}
+		//System.out.println(board[x][y]);
 	    }
 	}
 	return null;
     }
 
     public Location getEnd(){
+	for(int y = 0; y < board[0].length; y++){
+	    for(int x = 0; x < board.length; x++){
+		if(board[x][y] == 'E'){
+		    Location f = new Location(x,y,null);
+		    return f;
+		}
+		//System.out.println(board[x][y]);
+	    }
+	}
 	return null;
     }
 
     public static void main(String[]d){
-	Maze g = new Maze("##########\n#        #\n##########");
-	System.out.println(""+g);
+	Maze g = new Maze("##########\n#S      E#\n##########");
+	System.out.println(""+g + " " + g.getStart().getX() + g.getStart().getY());
     }
 
 }

@@ -21,8 +21,18 @@ public class MazeSolver{
 	//  add all the locations to the frontier
 	//when there are no more values in the frontier return false
 	Frontier Q = new FrontierQueue();
+	Q.add(maze.getStart());
+	if(Q.hasNext()){
+	    System.out.println("kewl");
+	}
+	else{
+	    System.out.println("boo");
+	}
 	while(Q.hasNext()){
 	    Location Ree = Q.next();
+	    System.out.println(Ree.getPart(maze));
+	    maze.walk(Ree);
+	    //Ree.getX();
 	    if(Ree.getX() == maze.getEnd().getX() && Ree.getY() == maze.getEnd().getY()){
 		return true;
 	    }

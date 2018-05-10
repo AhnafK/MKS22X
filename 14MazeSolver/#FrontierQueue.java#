@@ -1,0 +1,7 @@
+import java.util.*;
+public class FrontierQueue implements Frontier{
+    private queue f;
+    public Location next(){
+	return 
+    }
+}

@@ -1,0 +1,5 @@
+public class Driver{
+    public static void main(String[]d){
+	MazeSolver f = new MazeSolver("################\n#S#          #E#\n################")
+    }
+}
