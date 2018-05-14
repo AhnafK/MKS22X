@@ -1,8 +1,8 @@
 public class Driver{
-    public static void main(String[]d){
-	MazeSolver f = new MazeSolver("################\n#S#          #E#\n#              #\n################");
-	System.out.println(""+f);
-	if(f.solve(1))
-	    System.out.println("good");
+    public static void main(String[]s){
+	MazeSolver f = new MazeSolver("d.txt");
+	System.out.println(f.maz()+"\n\n");
+	f.solve(2);
+	System.out.println(f.maz()+"");
     }
 }

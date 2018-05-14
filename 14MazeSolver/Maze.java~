@@ -18,14 +18,14 @@ public class Maze{
     public Location[] getNeighbors(Location L){
 	int num = 0;
 	for(int x = 0; x < 4; x++){
-	    if(NLH(L,x).getPart(this) == ' ' || NLH(L,x).getPart(this) == 'E')
+	    if(NLH(n,x).getPart(this) == ' ')
 		num+=1;
 	}
-	Location[] f = new Location[num];
+	Location[] f = (Location[])new Object[num];
 	int y = 0;
 	for(int x = 0; x < 4; x++){
-	    Location Jeff = NLH(L,x);
-	    if(Jeff.getPart(this) == ' ' || NLH(L,x).getPart(this) == 'E'){
+	    Location Jeff = NLH(n,x);
+	    if(Jeff.getPart(this) == ' '){
 		f[y] = Jeff;
 		y++;
 	    }
@@ -189,5 +189,3 @@ public class Maze{
     }
     return ans;
   }
-    
-}

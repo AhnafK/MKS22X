@@ -1,6 +1,6 @@
 
 public interface Frontier{
-  public Location next();
-  public void add(Location n);
-  public boolean hasNext();
+    public Location next();
+    public void add(Location n);
+    public boolean hasNext();
 }

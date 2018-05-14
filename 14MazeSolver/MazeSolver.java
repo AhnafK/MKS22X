@@ -20,25 +20,45 @@ public class MazeSolver{
 	//  check if any locations are the end, if you found the end just return true!
 	//  add all the locations to the frontier
 	//when there are no more values in the frontier return false
-	Frontier Q = new FrontierQueue();
-	Q.add(maze.getStart());
-	if(Q.hasNext()){
-	    System.out.println("kewl");
+	Frontier Q;
+	if(mode == 1){
+	    Q = new FrontierStack();
+	}
+	else if(mode == 2){
+	    Q = new FrontierPriorityQueue();
 	}
 	else{
-	    System.out.println("boo");
+	    Q = new FrontierQueue();
 	}
+	Q.add(maze.getStart());
+	Location Ree = Q.next();
+	//if(Q.hasNext())
+	//    System.out.println("G");
+	Location[] g = maze.getNeighbors(Ree);
+	for(int l = 0; l < g.length; l++){
+		Q.add(g[l]);
+	    }
+	
+	//if(Q.hasNext())
+	//    System.out.println("F");
 	while(Q.hasNext()){
-	    Location Ree = Q.next();
-	    System.out.println(Ree.getPart(maze));
-	    maze.walk(Ree);
-	    //Ree.getX();
+	    Ree = Q.next();
+	    
 	    if(Ree.getX() == maze.getEnd().getX() && Ree.getY() == maze.getEnd().getY()){
+		while(Ree.hasPrev()&&!(Ree.getX() == maze.getStart().getX() && Ree.getY() == maze.getStart().getY())){
+		    Ree = Ree.getPrev();
+		    Ree.set(maze, '@');
+		    
+		}
 		return true;
 	    }
-	    Location[] g = maze.getNeighbors(Ree);
+	    Ree.set(maze,'.');
+	    g = maze.getNeighbors(Ree);
+	    if(g.length > 0){
 	    for(int l = 0; l < g.length; l++){
 		Q.add(g[l]);
+	    }
+	    //System.out.println(""+maze);
 	    }
 	}
 	return false;
@@ -46,5 +66,9 @@ public class MazeSolver{
 
     public String toString(){
 	return maze.toString();
+    }
+
+    public Maze maz(){
+	return maze;
     }
 }

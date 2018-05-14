@@ -1,20 +1,21 @@
-import java.util.*;
-public class FrontierQueue implements Frontier{
-    private Queue<Location> FQ;
+import java.util.Queue;
 
-    public FrontierQueue(){
-	FQ = new ArrayDeque<Location>();
-    }
-    
-    public Location next(){
-	return FQ.poll();
-    }
-
-    public void add(Location n){
-	FQ.add(n);
-    }
-
-    public boolean hasNext(){
-	return FQ.peek()!=null;
-    }
+public class FrontierQueue implements Frontier {
+  private Queue<Location> FQ;
+  
+  public FrontierQueue() { FQ = new java.util.ArrayDeque(); }
+  
+  public Location next()
+  {
+    return (Location)FQ.poll();
+  }
+  
+  public void add(Location paramLocation) {
+      System.out.println(""+paramLocation.getX() + ", " + paramLocation.getY());
+      FQ.add(paramLocation);
+  }
+  
+  public boolean hasNext() {
+    return FQ.peek() != null;
+  }
 }
