@@ -1,10 +1,10 @@
 //import java.util.*;
 
-public class RunningMedian{
+public class RunningMedians{
     private MyHeap<Double> small;
     private MyHeap<Double> large;
 
-    public RunningMedian(){
+    public RunningMedians(){
 	small = new MyHeap<>();
 	large = new MyHeap<>(false);
     }
@@ -65,7 +65,7 @@ public class RunningMedian{
     }
 
     public static void main(String[]args){
-	RunningMedian f = new RunningMedian();
+	RunningMedians f = new RunningMedians();
 	f.add(123.);
 	f.add(536.);
 	f.add(2.);
