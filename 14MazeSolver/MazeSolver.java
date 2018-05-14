@@ -21,10 +21,15 @@ public class MazeSolver{
 	//  add all the locations to the frontier
 	//when there are no more values in the frontier return false
 	Frontier Q;
+	boolean A = false
 	if(mode == 1){
 	    Q = new FrontierStack();
 	}
 	else if(mode == 2){
+	    Q = new FrontierPriorityQueue();
+	}
+	else if(mode == 3){
+	    A = true;
 	    Q = new FrontierPriorityQueue();
 	}
 	else{
