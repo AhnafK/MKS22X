@@ -23,6 +23,10 @@ public class Location implements Comparable<Location>{
     public void A(){
 	A = true;
     }
+
+    public boolean A(){
+	return A;
+    }
     
     public int compareTo(Location o){
 	if(A){

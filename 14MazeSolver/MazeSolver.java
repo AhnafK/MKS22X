@@ -21,7 +21,7 @@ public class MazeSolver{
 	//  add all the locations to the frontier
 	//when there are no more values in the frontier return false
 	Frontier Q;
-	boolean A = false
+	boolean A = false;
 	if(mode == 1){
 	    Q = new FrontierStack();
 	}
