@@ -24,32 +24,41 @@ public class MazeSolver{
 	if(mode == 1){
 	    Q = new FrontierStack();
 	}
+	else if(mode == 2){
+	    Q = new FrontierPriorityQueue();
+	}
 	else{
 	    Q = new FrontierQueue();
 	}
 	Q.add(maze.getStart());
 	Location Ree = Q.next();
-	if(Q.hasNext())
-	    System.out.println("G");
+	//if(Q.hasNext())
+	//    System.out.println("G");
 	Location[] g = maze.getNeighbors(Ree);
 	for(int l = 0; l < g.length; l++){
 		Q.add(g[l]);
 	    }
 	
-	if(Q.hasNext())
-	    System.out.println("F");
+	//if(Q.hasNext())
+	//    System.out.println("F");
 	while(Q.hasNext()){
 	    Ree = Q.next();
-	    Ree.set(maze,'@');
+	    
 	    if(Ree.getX() == maze.getEnd().getX() && Ree.getY() == maze.getEnd().getY()){
+		while(Ree.hasPrev()&&!(Ree.getX() == maze.getStart().getX() && Ree.getY() == maze.getStart().getY())){
+		    Ree = Ree.getPrev();
+		    Ree.set(maze, '@');
+		    
+		}
 		return true;
 	    }
+	    Ree.set(maze,'.');
 	    g = maze.getNeighbors(Ree);
-	    if(g.length == 0){
-		Ree.set(maze,'.');
-	    }
+	    if(g.length > 0){
 	    for(int l = 0; l < g.length; l++){
 		Q.add(g[l]);
+	    }
+	    //System.out.println(""+maze);
 	    }
 	}
 	return false;

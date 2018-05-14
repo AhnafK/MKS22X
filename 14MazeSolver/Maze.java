@@ -25,7 +25,7 @@ public class Maze{
 	int y = 0;
 	for(int x = 0; x < 4; x++){
 	    Location Jeff = NLH(L,x);
-	    if(Jeff.getPart(this) == ' '){
+	    if(Jeff.getPart(this) == ' ' || NLH(L,x).getPart(this) == 'E'){
 		f[y] = Jeff;
 		y++;
 	    }

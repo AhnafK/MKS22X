@@ -11,7 +11,8 @@ public class FrontierQueue implements Frontier {
   }
   
   public void add(Location paramLocation) {
-    FQ.add(paramLocation);
+      System.out.println(""+paramLocation.getX() + ", " + paramLocation.getY());
+      FQ.add(paramLocation);
   }
   
   public boolean hasNext() {
