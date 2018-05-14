@@ -1,0 +1,13 @@
+public class Driver{
+<<<<<<< HEAD
+    public static void main(String[]s){
+	Mazesolver f = new MazeSOlver("d.txt");
+	System.out.println(f.maz()+"\n\n");
+	f.solve();
+	System.out.println(f.maz()+"");
+=======
+    public static void main(String[]d){
+	MazeSolver f = new MazeSolver("################\n#S#          #E#\n################")
+>>>>>>> f8ed69e0c31fb0e7c097f7556ab7fe246175c9ce
+    }
+}
