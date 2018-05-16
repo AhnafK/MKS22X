@@ -20,11 +20,11 @@ public class Location implements Comparable<Location>{
 	}
     }
 
-    public void A(){
+    public void As(){
 	A = true;
     }
 
-    public boolean getA(){
+    public boolean A(){
 	return A;
     }
     

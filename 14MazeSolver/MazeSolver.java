@@ -35,19 +35,24 @@ public class MazeSolver{
 	else{
 	    Q = new FrontierQueue();
 	}
-	Q.add(maze.getStart());
-	Location Ree = Q.next();
-	//if(Q.hasNext())
-	//    System.out.println("G");
-	Location[] g = maze.getNeighbors(Ree);
+	Location jeret = maze.getStart();
+	
+	if(A){
+	    jeret.A();
+	}
+        
+	
+	Location[] g = maze.getNeighbors(jeret);
+
+	
 	for(int l = 0; l < g.length; l++){
 		Q.add(g[l]);
 	    }
+
+
 	
-	//if(Q.hasNext())
-	//    System.out.println("F");
 	while(Q.hasNext()){
-	    Ree = Q.next();
+	    Location Ree = Q.next();
 	    
 	    if(Ree.getX() == maze.getEnd().getX() && Ree.getY() == maze.getEnd().getY()){
 		while(Ree.hasPrev()&&!(Ree.getX() == maze.getStart().getX() && Ree.getY() == maze.getStart().getY())){
